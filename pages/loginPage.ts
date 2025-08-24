@@ -24,7 +24,7 @@ export default class loginPage {
     password: string
   ) {
     await page.goto(url);
-    await page.setViewportSize({ width: 1530, height: 816 });
+    // await page.setViewportSize({ width: 1530, height: 816 });
     await page.fill(this.emailTextField, username);
     await page.fill(this.passwordTextField, password);
     await page.locator(this.loginButton).click();

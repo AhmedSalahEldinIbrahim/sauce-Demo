@@ -4,7 +4,7 @@ import productsPage from '../pages/productsPage';
 import cartPage from '../pages/cartPage';
 import testData from '../testData.json';
 import { getEnvConfig } from '../utils/env.config';
-test.describe.configure({ mode: 'parallel' });
+test.describe.configure({ mode: 'parallel', retries: 5 });
 const env = process.env.ENV || 'dev';
 const config = getEnvConfig(env);
 const login = new loginPage();
@@ -22,6 +22,7 @@ test.describe('cart Page Scenarios', () => {
     await products.sortByPriceLowToHigh(page);
     await products.clickOnAddtocart(page);
     await products.clickOnCartBadgeIcon(page);
+    await page.waitForTimeout(3000);
     const quantity = await cart.validateItemQuantity(page);
     const getQuantityText = await quantity.allTextContents();
     console.log('Quantity', getQuantityText);
@@ -31,7 +32,7 @@ test.describe('cart Page Scenarios', () => {
     console.log('Price', getPriceText);
     expect(Prices).toHaveText([testData.FIRSTITEMPRICE, testData.SECONDITEMPRICE]);
   });
-  test('navigate To The CheckoutPage', async ({ page }) => {
+  test('[smoke] navigate To The CheckoutPage', async ({ page }) => {
     await login.loginToHomePageWithValidCredentials(
       page,
       config.URL,

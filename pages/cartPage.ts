@@ -19,6 +19,7 @@ export default class cartPage {
     return page.locator(this.cartList).locator(this.priceField);
   }
   async clickOnCheckoutButton(page: Page) {
+    await page.waitForTimeout(3000);
     await page.locator(this.checkoutButton).click();
   }
 }

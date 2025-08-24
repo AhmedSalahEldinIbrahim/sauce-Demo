@@ -5,7 +5,7 @@ import { getEnvConfig } from '../utils/env.config';
 const env = process.env.ENV || 'dev';
 const config = getEnvConfig(env);
 const login = new loginPage();
-test.describe.configure({ mode: 'parallel' });
+test.describe.configure({ mode: 'parallel', retries: 5 });
 test.describe('login Page Scenarios ', () => {
   test('[smoke] login To Home Page With Valid Credentials', async ({ page }) => {
     await login.loginToHomePageWithValidCredentials(

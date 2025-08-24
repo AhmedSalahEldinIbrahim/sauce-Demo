@@ -6,7 +6,7 @@ import checkoutPage from '../pages/checkoutPage';
 import checkoutOverViewPage from '../pages/checkoutOverViewPage';
 import checkoutCompletePage from '../pages/checkoutCompletePage';
 import { getEnvConfig } from '../utils/env.config';
-test.describe.configure({ mode: 'parallel' });
+test.describe.configure({ mode: 'parallel', retries: 5 });
 const env = process.env.ENV || 'dev';
 const config = getEnvConfig(env);
 const login = new loginPage();

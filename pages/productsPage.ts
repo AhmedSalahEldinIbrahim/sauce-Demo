@@ -19,10 +19,9 @@ export default class productsPage {
     return 'button:has-text("Remove")';
   }
   private get cartBadgeIcon() {
-    return '[data-test=shopping-cart-badge]';
+    return '[data-test="shopping-cart-link"]';
   }
   async clickOnCartBadgeIcon(page: Page) {
-    await page.waitForTimeout(3000);
     page.locator(this.cartBadgeIcon).click();
   }
   getProductsPageTitle(page: Page) {
