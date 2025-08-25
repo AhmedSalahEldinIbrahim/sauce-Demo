@@ -3,7 +3,6 @@ import loginPage from '../pages/loginPage';
 import productsPage from '../pages/productsPage';
 import cartPage from '../pages/cartPage';
 import checkoutPage from '../pages/checkoutPage';
-import testData from '../testData.json';
 import { getEnvConfig } from '../utils/env.config';
 test.describe.configure({ mode: 'parallel', retries: 5 });
 const env = process.env.ENV || 'dev';
@@ -25,12 +24,7 @@ test.describe('checkout Page Scenarios', () => {
     await products.clickOnAddtocart(page);
     await products.clickOnCartBadgeIcon(page);
     await cart.clickOnCheckoutButton(page);
-    await checkout.enterYourInformationeField(
-      page,
-      testData.FIRSTNAME,
-      testData.LASTNAME,
-      testData.POSTALCODE
-    );
+    await checkout.enterYourInformationeField(page);
     await page.waitForTimeout(3000);
   });
 });
