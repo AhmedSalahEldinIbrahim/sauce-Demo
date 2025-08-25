@@ -1,15 +1,18 @@
 # Playwright Test Automation Project
 
 ## Overview
+
 This project uses [Playwright](https://playwright.dev/) for end-to-end UI testing across multiple browsers (Chromium, Firefox, and WebKit). It follows the Page Object Model (POM) for better maintainability and scalability.
 
 ## Installation
 
 ### Prerequisites
+
 - [Node.js](https://nodejs.org/) (version 16 or higher recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
 ### Steps
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/AhmedSalahEldinIbrahim/sauce-Demo.git
@@ -56,6 +59,7 @@ This project uses [Playwright](https://playwright.dev/) for end-to-end UI testin
 ## Running Tests in CI
 
 Example GitHub Actions workflow:
+
 ```yaml
 name: Playwright Tests
 on: [push, pull_request]
@@ -86,6 +90,7 @@ jobs:
 ```
 
 ## Tools & Libraries Used
+
 - [Playwright](https://playwright.dev/) – Browser automation & testing
 - TypeScript – Static typing
 - Playwright Test Runner – Built-in Jest-like assertions
@@ -93,12 +98,14 @@ jobs:
 - Optional: Allure or HTML reporter for enhanced reporting
 
 ## Assumptions & Limitations
+
 - Test data (URLs, credentials) come from `utils` files or environment variables.
 - Supports Chromium, Firefox, and WebKit; mobile/API testing requires extra setup.
 - Selectors rely on `data-test` attributes; UI changes may require selector updates.
 - CI example assumes GitHub Actions; syntax varies for other CI/CD tools.
 
 ## Contribution Guidelines
+
 - Follow the Page Object Model pattern.
 - Keep selectors inside page classes, not directly in test files.
 - Update README if tools, commands, or structure change.
