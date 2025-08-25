@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import testData from '../testData.json';
-export default class cartPage {
+export default class checkoutPage {
   private get firstNameField(): string {
     return '[name="firstName"]';
   }

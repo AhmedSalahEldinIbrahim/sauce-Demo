@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-export default class cartPage {
+export default class checkoutCompletePage {
   private get successfulMessage(): string {
     return '[data-test=complete-header]';
   }

@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-export default class cartPage {
+export default class checkoutOverViewPage {
   private get totalCalculation(): string {
     return '[data-test=total-label]';
   }
