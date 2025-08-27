@@ -1,6 +1,10 @@
 import { Page } from '@playwright/test';
 import productsPage from './productsPage';
-export default class loginPage {
+export default class LoginPage {
+  readonly page: Page;
+  constructor(page: Page) {
+    this.page = page;
+  }
   private get emailTextField() {
     return '[name="user-name"]';
   }
@@ -17,35 +21,28 @@ export default class loginPage {
     return '[data-test=error]';
   }
 
-  async loginToHomePageWithValidCredentials(
-    page: Page,
-    url: string,
-    username: string,
-    password: string
-  ) {
-    await page.goto(url);
+  async loginToHomePageWithValidCredentials(url: string, username: string, password: string) {
+    await this.page.goto(url);
     // await page.setViewportSize({ width: 1530, height: 816 });
-    await page.fill(this.emailTextField, username);
-    await page.fill(this.passwordTextField, password);
-    await page.locator(this.loginButton).click();
-    return new productsPage();
+    await this.page.fill(this.emailTextField, username);
+    await this.page.fill(this.passwordTextField, password);
+    await this.page.locator(this.loginButton).click();
   }
-  getProductsPageTitle(page: Page) {
-    return page.locator(this.ProductsPageTitle);
+  getProductsPageTitle() {
+    return this.page.locator(this.ProductsPageTitle);
   }
   async loginToHomePageWithInValidCredentials(
-    page: Page,
     url: string,
     username: string,
     inValidPassword: string
   ) {
-    await page.goto(url);
-    await page.setViewportSize({ width: 1530, height: 816 });
-    await page.fill(this.emailTextField, username);
-    await page.fill(this.passwordTextField, inValidPassword);
-    await page.locator(this.loginButton).click();
+    await this.page.goto(url);
+    await this.page.setViewportSize({ width: 1530, height: 816 });
+    await this.page.fill(this.emailTextField, username);
+    await this.page.fill(this.passwordTextField, inValidPassword);
+    await this.page.locator(this.loginButton).click();
   }
-  getErrorMessage(page: Page) {
-    return page.locator(this.errorMessage);
+  getErrorMessage() {
+    return this.page.locator(this.errorMessage);
   }
 }

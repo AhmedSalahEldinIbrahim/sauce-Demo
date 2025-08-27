@@ -1,9 +1,13 @@
 import { Page } from '@playwright/test';
-export default class checkoutCompletePage {
+export default class CheckoutCompletePage {
+  readonly page: Page;
+  constructor(page: Page) {
+    this.page = page;
+  }
   private get successfulMessage(): string {
     return '[data-test=complete-header]';
   }
-  getsuccessfulMessage(page: Page) {
-    return page.locator(this.successfulMessage);
+  getsuccessfulMessage() {
+    return this.page.locator(this.successfulMessage);
   }
 }

@@ -1,5 +1,9 @@
 import { Page } from '@playwright/test';
-export default class productsPage {
+export default class ProductsPage {
+  readonly page: Page;
+  constructor(page: Page) {
+    this.page = page;
+  }
   private get filterIcon() {
     return '[data-test=product-sort-container]';
   }
@@ -21,21 +25,22 @@ export default class productsPage {
   private get cartBadgeIcon() {
     return '[data-test="shopping-cart-link"]';
   }
-  async clickOnCartBadgeIcon(page: Page) {
-    page.locator(this.cartBadgeIcon).click();
+  async clickOnCartBadgeIcon() {
+    this.page.locator(this.cartBadgeIcon).click();
+    await this.page.waitForTimeout(4000);
   }
-  getProductsPageTitle(page: Page) {
-    return page.locator(this.ProductsPageTitle);
+  getProductsPageTitle() {
+    return this.page.locator(this.ProductsPageTitle);
   }
-  async sortByPriceLowToHigh(page: Page) {
-    page.locator(this.filterIcon).selectOption(this.filterByPriceLowToHigh);
+  async sortByPriceLowToHigh() {
+    this.page.locator(this.filterIcon).selectOption(this.filterByPriceLowToHigh);
   }
-  async clickOnAddtocart(page: Page) {
+  async clickOnAddtocart() {
     for (let i = 0; i < 2; i++) {
-      await page.locator(this.itemContainer).nth(i).locator(this.addToCartButton).click();
+      await this.page.locator(this.itemContainer).nth(i).locator(this.addToCartButton).click();
     }
   }
-  valiateItemsAreAdded(index: number, page: Page) {
-    return page.locator(this.itemContainer).nth(index).locator(this.removeButton);
+  valiateItemsAreAdded(index: number) {
+    return this.page.locator(this.itemContainer).nth(index).locator(this.removeButton);
   }
 }

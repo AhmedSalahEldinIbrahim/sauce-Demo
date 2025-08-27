@@ -1,34 +1,28 @@
-import { test, expect } from '@playwright/test';
-import loginPage from '../pages/loginPage';
-import productsPage from '../pages/productsPage';
-import cartPage from '../pages/cartPage';
-import checkoutPage from '../pages/checkoutPage';
-import checkoutOverViewPage from '../pages/checkoutOverViewPage';
-import checkoutCompletePage from '../pages/checkoutCompletePage';
+import { test, expect } from '../baseTest';
 import { getEnvConfig } from '../utils/env.config';
 test.describe.configure({ mode: 'parallel', retries: 5 });
 const env = process.env.ENV || 'dev';
 const config = getEnvConfig(env);
-const login = new loginPage();
-const products = new productsPage();
-const cart = new cartPage();
-const checkout = new checkoutPage();
-const checkoutOverView = new checkoutOverViewPage();
-const checkoutComplete = new checkoutCompletePage();
 test.describe('checkout Complete Page Scenarios', () => {
-  test('[smoke] SuccessfulMessageAppeared', async ({ page }) => {
-    await login.loginToHomePageWithValidCredentials(
-      page,
+  test('[smoke] SuccessfulMessageAppeared', async ({
+    loginPage,
+    productPage,
+    cartPage,
+    checkoutPage,
+    checkoutOverViewPage,
+    checkoutCompletePage,
+  }) => {
+    await loginPage.loginToHomePageWithValidCredentials(
       config.URL,
       config.USERNAME,
       config.PASSWORD
     );
-    await products.sortByPriceLowToHigh(page);
-    await products.clickOnAddtocart(page);
-    await products.clickOnCartBadgeIcon(page);
-    await cart.clickOnCheckoutButton(page);
-    await checkout.enterYourInformationeField(page);
-    await checkoutOverView.clickOnFinishButton(page);
-    await expect(checkoutComplete.getsuccessfulMessage(page)).toBeVisible();
+    await productPage.sortByPriceLowToHigh();
+    await productPage.clickOnAddtocart();
+    await productPage.clickOnCartBadgeIcon();
+    await cartPage.clickOnCheckoutButton();
+    await checkoutPage.enterYourInformationeField();
+    await checkoutOverViewPage.clickOnFinishButton();
+    await expect(checkoutCompletePage.getsuccessfulMessage()).toBeVisible();
   });
 });

@@ -1,15 +1,19 @@
 import { Page } from '@playwright/test';
-export default class checkoutOverViewPage {
+export default class CheckoutOverViewPage {
+  readonly page: Page;
+  constructor(page: Page) {
+    this.page = page;
+  }
   private get totalCalculation(): string {
     return '[data-test=total-label]';
   }
   private get finishButton(): string {
     return '[name="finish"]';
   }
-  getTotalCalculation(page: Page) {
-    return page.locator(this.totalCalculation);
+  getTotalCalculation() {
+    return this.page.locator(this.totalCalculation);
   }
-  async clickOnFinishButton(page: Page) {
-    await page.locator(this.finishButton).click();
+  async clickOnFinishButton() {
+    await this.page.locator(this.finishButton).click();
   }
 }

@@ -1,5 +1,9 @@
 import { Page } from '@playwright/test';
-export default class cartPage {
+export default class CartPage {
+  readonly page: Page;
+  constructor(page: Page) {
+    this.page = page;
+  }
   private get cartList(): string {
     return '.cart_item';
   }
@@ -12,14 +16,14 @@ export default class cartPage {
   private get checkoutButton(): string {
     return '[name="checkout"]';
   }
-  validateItemQuantity(page: Page) {
-    return page.locator(this.cartList).locator(this.quantityField);
+  validateItemQuantity() {
+    return this.page.locator(this.cartList).locator(this.quantityField);
   }
-  validateItemPrice(page: Page) {
-    return page.locator(this.cartList).locator(this.priceField);
+  validateItemPrice() {
+    return this.page.locator(this.cartList).locator(this.priceField);
   }
-  async clickOnCheckoutButton(page: Page) {
-    await page.waitForTimeout(3000);
-    await page.locator(this.checkoutButton).click();
+  async clickOnCheckoutButton() {
+    await this.page.waitForTimeout(3000);
+    await this.page.locator(this.checkoutButton).click();
   }
 }
